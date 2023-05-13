@@ -41,7 +41,7 @@ function Signin() {
   const register = async () => {
     if (name !== "" && balance !== "") {
       try {
-        const req = await axios.post("/createuser", {
+        const req = await axios.post("/api/createuser", {
           name: name,
           bal: parseInt(balance),
         });
@@ -71,7 +71,7 @@ function Signin() {
   const enterApp = async () => {
     if (lprivateKey !== "") {
       try {
-        const req = await axios.get("/users");
+        const req = await axios.get("/api/users");
         // console.log(req);
         for (let i = 0; i < req.data.length; i++) {
           const pKey = new Uint8Array(

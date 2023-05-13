@@ -36,7 +36,7 @@ function Home() {
 
   const getUsers = async () => {
     try {
-      const req = await axios.get("/users");
+      const req = await axios.get("/api/users");
       for (let i = 0; i < req.data.length; i++) {
         const pubKey = new Uint8Array(
           req.data[i].publicKey.split(",").map(Number)
@@ -54,7 +54,7 @@ function Home() {
 
   const updateBalance = async () => {
     try {
-      const req = await axios.get("/users");
+      const req = await axios.get("/api/users");
       for (let i = 0; i < req.data.length; i++) {
         const pKey = new Uint8Array(
           req.data[i].privateKey.split(",").map(Number)
@@ -78,7 +78,7 @@ function Home() {
   const executeTransaction = async (from, to, amount) => {
     if (amount <= accBalance) {
       try {
-        const transac = await axios.post("/transaction", {
+        const transac = await axios.post("/api/transaction", {
           from: from,
           to: to,
           amount: amount,
@@ -99,7 +99,7 @@ function Home() {
   const handleSignAndVerify = async () => {
     try {
       const msg = `Signing the transfer of ${amount} from ${from} account to ${to} account`;
-      const recoveredPublicKey = await axios.post("/verifysignature", {
+      const recoveredPublicKey = await axios.post("/api/verifysignature", {
         msg: msg,
         privateKey: privateKey,
         publicKey: from,
@@ -189,7 +189,7 @@ function Home() {
                 }}
               >
                 <CircularProgress />
-                {loading ? "Signing Transaction" : ""}
+                {loading ? "Signing and Verifying Using ECDSA Algorithms" : ""}
               </Box>
             ) : (
               ""
