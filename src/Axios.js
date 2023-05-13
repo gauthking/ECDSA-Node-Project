@@ -1,7 +1,8 @@
 import axios from "axios";
-
+import * as dot from "dotenv"
+dot.config()
 const instance = axios.create({
-    baseURL: "https://ecdsa-backend1.onrender.com",
+    baseURL: process.env.BACKEND,
 })
 
 export default instance
